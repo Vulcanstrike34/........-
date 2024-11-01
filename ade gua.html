@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Love Button</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #fce4ec;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .love-container {
+      text-align: center;
+    }
+
+    .love-button {
+      background-color: #ff4081;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      outline: none;
+      position: relative;
+    }
+
+    .love-button:active {
+      transform: scale(0.95);
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 24px;
+      color: #ff4081;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .heart {
+      position: absolute;
+      color: #ff4081;
+      font-size: 16px;
+      animation: float 1s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes float {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="love-container">
+    <button class="love-button" onclick="showMessage()">Love</button>
+    <div class="message" id="message"> كل ما عليك فعله هو أن تكون أفضل من الأمس، وليس أفضل من الآخرين</div>
+  </div>
+
+  <script>
+    function showMessage() {
+      const message = document.getElementById('message');
+      message.style.opacity = 1;
+      
+      createHeart();
+      
+      setTimeout(() => {
+        message.style.opacity = 0;
+      }, 2000); // Menghilangkan teks setelah 2 detik
+    }
+
+    function createHeart() {
+      const button = document.querySelector('.love-button');
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerText = '❤️';
+
+      const x = Math.random() * 100 - 50;
+      const y = Math.random() * 100 - 50;
+      heart.style.transform = `translate(${x}px, ${y}px)`;
+      button.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 1000); // Menghapus efek hati setelah animasi selesai
+    }
+  </script>
+</body>
+</html>
